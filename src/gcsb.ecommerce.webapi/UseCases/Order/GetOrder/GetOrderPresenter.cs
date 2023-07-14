@@ -7,31 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace gcsb.ecommerce.webapi.UseCases.Order.GetOrder
 {
-    public class GetOrderPresenter : IOutputPort<List<domain.Order.Order>>
+    public class GetOrderPresenter : Presenter<List<domain.Order.Order>,OrderResponse>
     {
-        public IActionResult ViewModel { get; private set; } = new ObjectResult(new { StatusCode = 500 });
 
-        public void Error(string message)
-        {
-           var problemdetails = new ProblemDetails()
-            {
-                Status = 500,
-                Detail = message
-            };
-            ViewModel = new BadRequestObjectResult(problemdetails);
-        }
-
-        public void NotFound(string message)
-        {
-            ViewModel = new NotFoundObjectResult(message);
-        }
-
-        public void Standard(List<domain.Order.Order> output)
-        {
-            var response = new OrderResponse(output);
-            this.ViewModel = new OkObjectResult(response);
-        }
-
-       
     }
 }

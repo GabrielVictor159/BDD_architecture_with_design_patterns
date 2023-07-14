@@ -13,15 +13,8 @@ namespace gcsb.ecommerce.webapi.Modules
     {
          protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<CreateOrderPresenter>()
-             .AsImplementedInterfaces()
-             .InstancePerLifetimeScope().AsSelf();
-             builder.RegisterType<GetOrderPresenter>()
-             .AsImplementedInterfaces()
-             .InstancePerLifetimeScope().AsSelf();
-             builder.RegisterType<RemoveOrderPresenter>()
-             .AsImplementedInterfaces()
-             .InstancePerLifetimeScope().AsSelf();
+            builder.RegisterAssemblyTypes(typeof(WebApiException).Assembly)
+            .AsImplementedInterfaces().AsSelf().InstancePerLifetimeScope();
         }
     }
 }
